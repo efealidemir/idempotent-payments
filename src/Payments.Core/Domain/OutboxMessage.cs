@@ -10,6 +10,9 @@ public class OutboxMessage
     public DateTimeOffset? PublishedAt { get; set; }
     public int Attempts { get; set; }
     public string? LastError { get; set; }
+
+    /// <summary>Earliest time of the next publish attempt after a failure (exponential backoff).</summary>
+    public DateTimeOffset? NextAttemptAt { get; set; }
 }
 
 /// <summary>Message ids already handled by a consumer (idempotent consumer pattern).</summary>
