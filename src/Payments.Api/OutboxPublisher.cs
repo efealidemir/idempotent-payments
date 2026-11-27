@@ -75,8 +75,10 @@ public class OutboxPublisher : BackgroundService
         using var scope = _scopes.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<PaymentsDbContext>();
 
+        var now = _clock.GetUtcNow();
         var messages = await db.OutboxMessages
-            .Where(m => m.PublishedAt == null && m.Attempts < MaxAttempts)
+            .Where(m => m.PublishedAt == null && m.Attempts < MaxAttempts
+                        && (m.NextAttemptAt == null || m.NextAttemptAt <= now))
             .OrderBy(m => m.OccurredAt)
             .Take(BatchSize)
             .ToListAsync(ct);
@@ -99,8 +101,11 @@ public class OutboxPublisher : BackgroundService
             {
                 message.Attempts++;
                 message.LastError = ex.Message;
-                _logger.LogWarning(ex, "Could not publish outbox message {MessageId}", message.Id);
-                break; // keep ordering: stop this batch, retry on the next poll
+                message.NextAttemptAt = _clock.GetUtcNow() + RetryPolicy.Backoff(message.Attempts);
+                _logger.LogWarning(ex,
+                    "Could not publish outbox message {MessageId} (attempt {Attempt}); next try at {NextAttemptAt}",
+                    message.Id, message.Attempts, message.NextAttemptAt);
+                break; // keep ordering: stop this batch, retry after the backoff delay
             }
         }
 
