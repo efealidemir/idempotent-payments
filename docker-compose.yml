@@ -1,0 +1,40 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Your_strong_Passw0rd"
+    ports:
+      - "1433:1433"
+
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  api:
+    build:
+      context: .
+      dockerfile: src/Payments.Api/Dockerfile
+    environment:
+      ConnectionStrings__Payments: "Server=sqlserver,1433;Database=Payments;User Id=sa;Password=Your_strong_Passw0rd;TrustServerCertificate=True"
+      RabbitMq__HostName: rabbitmq
+      ASPNETCORE_URLS: http://+:8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      - sqlserver
+      - rabbitmq
+    restart: on-failure # SQL Server can take a few seconds to accept connections
+
+  worker:
+    build:
+      context: .
+      dockerfile: src/Payments.Worker/Dockerfile
+    environment:
+      ConnectionStrings__Payments: "Server=sqlserver,1433;Database=Payments;User Id=sa;Password=Your_strong_Passw0rd;TrustServerCertificate=True"
+      RabbitMq__HostName: rabbitmq
+    depends_on:
+      - api
+    restart: on-failure

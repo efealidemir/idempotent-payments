@@ -1,0 +1,37 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payments.Core", "src\Payments.Core\Payments.Core.csproj", "{080C7CA7-65C6-4CDF-81E2-9BFCEE5A6940}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payments.Api", "src\Payments.Api\Payments.Api.csproj", "{62FBA51C-1366-452E-B891-F9F81769699C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payments.Worker", "src\Payments.Worker\Payments.Worker.csproj", "{E3982921-1BBD-4C7C-8257-7E84101869A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payments.Tests", "tests\Payments.Tests\Payments.Tests.csproj", "{250D8C96-1E77-4568-886E-97D20C0A5C3C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{080C7CA7-65C6-4CDF-81E2-9BFCEE5A6940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{080C7CA7-65C6-4CDF-81E2-9BFCEE5A6940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{080C7CA7-65C6-4CDF-81E2-9BFCEE5A6940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{080C7CA7-65C6-4CDF-81E2-9BFCEE5A6940}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62FBA51C-1366-452E-B891-F9F81769699C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62FBA51C-1366-452E-B891-F9F81769699C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62FBA51C-1366-452E-B891-F9F81769699C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62FBA51C-1366-452E-B891-F9F81769699C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3982921-1BBD-4C7C-8257-7E84101869A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3982921-1BBD-4C7C-8257-7E84101869A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3982921-1BBD-4C7C-8257-7E84101869A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3982921-1BBD-4C7C-8257-7E84101869A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{250D8C96-1E77-4568-886E-97D20C0A5C3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{250D8C96-1E77-4568-886E-97D20C0A5C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{250D8C96-1E77-4568-886E-97D20C0A5C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{250D8C96-1E77-4568-886E-97D20C0A5C3C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
